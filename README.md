@@ -1,5 +1,15 @@
 # CNIGT v2.1.0 - Installation Guide
 
+⚠️ LEGAL DISCLAIMER
+
+This tool is for authorized security testing and educational purposes ONLY.
+
+YOU MUST HAVE EXPLICIT PERMISSION to scan any network you do not own or administrate. Unauthorized network scanning is ILLEGAL in most jurisdictions, Violates computer fraud laws, May result in criminal charges, fines, or imprisonment and Could get you banned from networks/services.
+
+Use CNIGT only on Your own home/office networks, Networks you have written permission to test, Your own lab/virtual environments and Educational sandboxes.
+
+The developer assumes NO responsibility for misuse of this tool. Use ethically and legally.
+
 ## 📋 Prerequisites
 
 This tool requires both Python packages and system tools to function properly.
