@@ -1,0 +1,13 @@
+# Python Package Requirements for CNIGT v2.1.0
+# Install with: pip install -r requirements.txt
+
+# Rich library for beautiful terminal output
+# Used for: colored text, tables, panels, progress bars
+rich>=13.0.0
+
+# Note: The following system tools are also required but must be installed via system package manager:
+# - nmap: sudo apt install nmap (required)
+# - arp-scan: sudo apt install arp-scan (optional but recommended)
+# - net-tools: sudo apt install net-tools (optional, for ifconfig)
+# - iproute2: usually pre-installed (provides 'ip' command)
+# - iputils-ping: usually pre-installed (provides 'ping' command)
