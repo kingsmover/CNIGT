@@ -10,13 +10,13 @@ Use CNIGT only on Your own home/office networks, Networks you have written permi
 
 The developer assumes NO responsibility for misuse of this tool. Use ethically and legally.
 
-## 📋 Prerequisites
+## Prerequisites
 
 This tool requires both Python packages and system tools to function properly.
 
 ---
 
-## 🐍 Python Requirements
+## Python Requirements
 
 ### Step 1: Ensure Python 3 is installed
 ```bash
@@ -42,7 +42,7 @@ pip install rich
 
 ---
 
-## 🛠️ System Tools Requirements
+## System Tools Requirements
 
 ### Required Tools
 
@@ -140,7 +140,7 @@ sudo apt update && sudo apt install -y python3 python3-pip nmap arp-scan net-too
 
 ---
 
-## ✅ Verify All Dependencies
+##  Verify All Dependencies
 
 Run this script to check if everything is installed:
 
@@ -234,7 +234,7 @@ chmod +x check_dependencies.sh
 
 ---
 
-## 🎯 Running the Script
+## Running the Script
 
 After installation:
 
@@ -253,7 +253,7 @@ sudo python3 network_scan.py
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Issue: "ModuleNotFoundError: No module named 'rich'"
 **Solution:**
@@ -289,7 +289,7 @@ sudo python3 network_scan.py
 
 ---
 
-## 📦 Installation on Different Systems
+## Installation on Different Systems
 
 ### Kali Linux
 ```bash
@@ -331,7 +331,7 @@ pip3 install rich
 
 ---
 
-## 🔐 Permissions Note
+## Permissions Note
 
 Some operations require root privileges:
 - **nmap** with OS detection (`-O`)
@@ -364,7 +364,7 @@ sudo python3 network_scan.py
 
 ---
 
-## ✨ Ready to Use!
+## Ready to Use!
 
 Once all dependencies are installed, you're ready to scan your network:
 
@@ -372,4 +372,4 @@ Once all dependencies are installed, you're ready to scan your network:
 sudo python3 network_scan.py
 ```
 
-Enjoy using CNIGT v2.1.0! 🎉
+Enjoy using CNIGT v2.1.0!
