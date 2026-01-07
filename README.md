@@ -153,73 +153,73 @@ echo "=========================================="
 # Check Python
 echo -n "Python3: "
 if command -v python3 &> /dev/null; then
-    echo "✅ Installed ($(python3 --version))"
+    echo " Installed ($(python3 --version))"
 else
-    echo "❌ Not installed"
+    echo " Not installed"
 fi
 
 # Check pip
 echo -n "pip: "
 if command -v pip &> /dev/null || command -v pip3 &> /dev/null; then
-    echo "✅ Installed"
+    echo " Installed"
 else
-    echo "❌ Not installed"
+    echo " Not installed"
 fi
 
 # Check rich
 echo -n "rich (Python): "
 if python3 -c "import rich" &> /dev/null; then
-    echo "✅ Installed"
+    echo " Installed"
 else
-    echo "❌ Not installed (run: pip install rich)"
+    echo " Not installed (run: pip install rich)"
 fi
 
 # Check nmap
 echo -n "nmap: "
 if command -v nmap &> /dev/null; then
-    echo "✅ Installed ($(nmap --version | head -1))"
+    echo " Installed ($(nmap --version | head -1))"
 else
-    echo "❌ Not installed (REQUIRED)"
+    echo " Not installed (REQUIRED)"
 fi
 
 # Check ping
 echo -n "ping: "
 if command -v ping &> /dev/null; then
-    echo "✅ Installed"
+    echo " Installed"
 else
-    echo "❌ Not installed (REQUIRED)"
+    echo " Not installed (REQUIRED)"
 fi
 
 # Check arp-scan
 echo -n "arp-scan: "
 if command -v arp-scan &> /dev/null; then
-    echo "✅ Installed ($(arp-scan --version | head -1))"
+    echo " Installed ($(arp-scan --version | head -1))"
 else
-    echo "⚠️  Not installed (RECOMMENDED)"
+    echo "  Not installed (RECOMMENDED)"
 fi
 
 # Check ifconfig
 echo -n "ifconfig: "
 if command -v ifconfig &> /dev/null; then
-    echo "✅ Installed"
+    echo " Installed"
 else
-    echo "⚠️  Not installed (optional, will use 'ip' command)"
+    echo "  Not installed (optional, will use 'ip' command)"
 fi
 
 # Check ip command
 echo -n "ip: "
 if command -v ip &> /dev/null; then
-    echo "✅ Installed"
+    echo " Installed"
 else
-    echo "❌ Not installed"
+    echo " Not installed"
 fi
 
 # Check arp
 echo -n "arp: "
 if command -v arp &> /dev/null; then
-    echo "✅ Installed"
+    echo " Installed"
 else
-    echo "⚠️  Not installed (needed for MAC address resolution)"
+    echo "  Not installed (needed for MAC address resolution)"
 fi
 
 echo "=========================================="
