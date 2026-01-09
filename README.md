@@ -1,375 +1,443 @@
-# CNIGT v2.1.0 - Installation Guide
+# CNIGT v2.1.0 - Current Network Information Gathering Tool
 
-⚠️ LEGAL DISCLAIMER
+**An automated network reconnaissance and vulnerability scanning tool with Metasploit integration.**
 
-This tool is for authorized security testing and educational purposes ONLY.
+---
 
-YOU MUST HAVE EXPLICIT PERMISSION to scan any network you do not own or administrate. Unauthorized network scanning is ILLEGAL in most jurisdictions, Violates computer fraud laws, May result in criminal charges, fines, or imprisonment and Could get you banned from networks/services.
+## ⚠️ LEGAL DISCLAIMER
 
-Use CNIGT only on Your own home/office networks, Networks you have written permission to test, Your own lab/virtual environments and Educational sandboxes.
+**This tool is for authorized security testing and educational purposes ONLY.**
 
-The developer assumes NO responsibility for misuse of this tool. Use ethically and legally.
+**YOU MUST HAVE EXPLICIT PERMISSION** to scan any network you do not own or administrate.
+
+### Unauthorized network scanning is:
+- **ILLEGAL** in most jurisdictions
+- Violates computer fraud and abuse laws
+- May result in **criminal charges, fines, or imprisonment**
+- Could get you **banned** from networks/services
+
+### Use CNIGT only on:
+- Your own home/office networks
+- Networks you have **written permission** to test
+- Your own lab/virtual environments
+- Educational sandboxes and CTF environments
+
+**The developer assumes NO responsibility for misuse of this tool. Use ethically and legally.**
+
+---
+
+## Features
+
+### v2.1.0 New Features
+- **Metasploit Integration** - Launch msfconsole directly from the tool
+- **CVE Detection** - Automatically extracts and highlights CVE IDs from vulnerability scans
+- **Colored Output** - Open ports highlighted in green for easy identification
+- **Post-Scan Menu** - Interactive menu after scans with multiple options
+- **Custom Port Ranges** - Specify exactly which ports to scan
+- **Persistent Context** - Re-run scans with different options without restarting
+
+### Core Features
+- **Automatic Network Detection** - Detects IP, subnet mask, and CIDR automatically
+- **Dual Discovery Methods** - Choose between arp-scan (fast) or ping (universal)
+- **Thorough Mode** - Enhanced arp-scan with high retry for slow-responding devices
+- **Rich Terminal UI** - Beautiful tables, colored output, and progress bars
+- **Comprehensive Nmap Options** - 13+ scan options including vulnerability scanning
+- **Host Information** - IP, MAC address, vendor, and hostname resolution
+- **Session Persistence** - Maintains scan context for efficient workflow
+
+---
 
 ## Prerequisites
 
-This tool requires both Python packages and system tools to function properly.
+### Required
+- **Python 3.6+**
+- **nmap** - Network scanning tool
+- **ping** - Usually pre-installed
+- **rich** - Python library for terminal formatting
+
+### Recommended
+- **arp-scan** - Fast host discovery (auto-installs if missing)
+- **net-tools** - Provides ifconfig (auto-installs if missing)
+
+### Optional
+- **Metasploit Framework** - For exploitation (auto-installs if needed)
 
 ---
 
-## Python Requirements
+## Installation
 
-### Step 1: Ensure Python 3 is installed
+### Quick Install (Debian/Ubuntu/Kali)
+
 ```bash
-python3 --version
+# One-liner installation
+sudo apt update && sudo apt install -y python3 python3-pip nmap arp-scan net-tools && pip install rich
+
+# Clone the repository
+git clone https://github.com/kingsmover/CNIGT.git
+cd CNIGT
+
+# Make executable
+chmod +x CNIGT.py
+
+# Run the tool
+sudo python3 CNIGT.py
 ```
-Should show Python 3.6 or higher.
 
-### Step 2: Install pip (if not already installed)
+### Manual Installation
+
+#### Step 1: Install Python Dependencies
 ```bash
+# Install pip if needed
 sudo apt update
 sudo apt install python3-pip -y
-```
 
-### Step 3: Install Python dependencies
-```bash
+# Install required Python packages
 pip install -r requirements.txt
-```
-
-Or install manually:
-```bash
+# or
 pip install rich
 ```
 
----
-
-## System Tools Requirements
-
-### Required Tools
-
-#### 1. **nmap** (Required)
+#### Step 2: Install System Tools
 ```bash
-# Debian/Ubuntu/Kali
-sudo apt update
+# Required tools
 sudo apt install nmap -y
 
-# CentOS/RHEL/Fedora
-sudo yum install nmap -y
-
-# Arch Linux
-sudo pacman -S nmap
-
-# macOS
-brew install nmap
+# Recommended tools
+sudo apt install arp-scan net-tools -y
 ```
 
-Verify installation:
+#### Step 3: Verify Installation
 ```bash
+python3 --version  # Should be 3.6+
 nmap --version
-```
-
-#### 2. **ping** (Usually pre-installed)
-```bash
-# If not installed (Debian/Ubuntu)
-sudo apt install iputils-ping -y
-```
-
-Verify installation:
-```bash
-ping -V
+arp-scan --version  # Optional but recommended
+pip show rich
 ```
 
 ---
 
-### Optional but Recommended Tools
+## Usage
 
-#### 3. **arp-scan** (Highly Recommended)
-For fast and reliable host discovery with MAC addresses and vendor information.
-
+### Basic Usage
 ```bash
-# Debian/Ubuntu/Kali
-sudo apt update
-sudo apt install arp-scan -y
-
-# CentOS/RHEL/Fedora
-sudo yum install arp-scan -y
-
-# Arch Linux
-sudo pacman -S arp-scan
-
-# macOS
-brew install arp-scan
+sudo python3 CNIGT.py
 ```
 
-Verify installation:
-```bash
-arp-scan --version
-```
+### Typical Workflow
 
-**Note:** The script will offer to install arp-scan automatically if it's not found.
+1. **Network Detection**
+   - Tool auto-detects your network interfaces
+   - Select network or enter manually
 
-#### 4. **net-tools** (Optional)
-Provides `ifconfig` command for network interface detection.
+2. **Choose Discovery Method**
+   - Option 1: arp-scan (fast, shows MAC/Vendor)
+   - Option 2: ping (slower, universal)
 
-```bash
-# Debian/Ubuntu/Kali
-sudo apt install net-tools -y
+3. **Select Scan Mode** (if arp-scan)
+   - Normal: Fast scan for most networks
+   - Thorough: Catches slow-responding devices
 
-# CentOS/RHEL/Fedora
-sudo yum install net-tools -y
+4. **Host Discovery**
+   - Tool scans and displays all online hosts
+   - Shows IP, MAC, Vendor, and Hostname
 
-# Arch Linux
-sudo pacman -S net-tools
-```
+5. **Configure Nmap Options**
+   - Select from 13+ scan options
+   - Custom port ranges
+   - Vulnerability scanning
 
-Verify installation:
-```bash
-ifconfig
-```
+6. **Scan Target**
+   - Select host from list or scan all
+   - View colored output (green = open ports)
+   - CVE IDs automatically highlighted
 
-**Note:** The script will offer to install net-tools automatically if it's not found, or fall back to `ip` command.
+7. **Post-Scan Actions**
+   - Re-scan with different options
+   - Scan another host
+   - Launch Metasploit if vulnerabilities found
+   - Exit or continue scanning
 
 ---
 
-## 🚀 Quick Installation (Debian/Ubuntu/Kali)
+## Nmap Options
 
-Run this one-liner to install everything:
-
-```bash
-sudo apt update && sudo apt install -y python3 python3-pip nmap arp-scan net-tools && pip install rich
-```
+| Option | Flag | Description |
+|--------|------|-------------|
+| 1 | `-sV` | Service Version Detection |
+| 2 | `-O` | OS Detection (requires sudo) |
+| 3 | `-p-` | Scan All 65535 Ports |
+| 4 | `-p 1-1000` | Scan Ports 1-1000 |
+| 5 | `-F` | Fast Scan (top 100 ports) |
+| 6 | `-p custom` | Custom Port Range |
+| 7 | `-sC` | Default NSE Scripts |
+| 8 | `-A` | Aggressive Scan |
+| 9 | `--open` | Show Only Open Ports |
+| 10 | `-T4` | Aggressive Timing |
+| 11 | `-v` | Verbose Output |
+| 12 | `-Pn` | Skip Host Discovery |
+| 13 | `--script vuln` | **Vulnerability Scan (CVE Detection)** |
 
 ---
 
-##  Verify All Dependencies
+## Features in Action
 
-Run this script to check if everything is installed:
+### Colored Output
+```
+✅ Found: 192.168.1.1 (aa:bb:cc:dd:ee:ff) - TP-Link
+✅ Found: 192.168.1.100 (11:22:33:44:55:66) - Apple
 
-```bash
-#!/bin/bash
-
-echo "Checking dependencies for CNIGT v2.1.0..."
-echo "=========================================="
-
-# Check Python
-echo -n "Python3: "
-if command -v python3 &> /dev/null; then
-    echo " Installed ($(python3 --version))"
-else
-    echo " Not installed"
-fi
-
-# Check pip
-echo -n "pip: "
-if command -v pip &> /dev/null || command -v pip3 &> /dev/null; then
-    echo " Installed"
-else
-    echo " Not installed"
-fi
-
-# Check rich
-echo -n "rich (Python): "
-if python3 -c "import rich" &> /dev/null; then
-    echo " Installed"
-else
-    echo " Not installed (run: pip install rich)"
-fi
-
-# Check nmap
-echo -n "nmap: "
-if command -v nmap &> /dev/null; then
-    echo " Installed ($(nmap --version | head -1))"
-else
-    echo " Not installed (REQUIRED)"
-fi
-
-# Check ping
-echo -n "ping: "
-if command -v ping &> /dev/null; then
-    echo " Installed"
-else
-    echo " Not installed (REQUIRED)"
-fi
-
-# Check arp-scan
-echo -n "arp-scan: "
-if command -v arp-scan &> /dev/null; then
-    echo " Installed ($(arp-scan --version | head -1))"
-else
-    echo "  Not installed (RECOMMENDED)"
-fi
-
-# Check ifconfig
-echo -n "ifconfig: "
-if command -v ifconfig &> /dev/null; then
-    echo " Installed"
-else
-    echo "  Not installed (optional, will use 'ip' command)"
-fi
-
-# Check ip command
-echo -n "ip: "
-if command -v ip &> /dev/null; then
-    echo " Installed"
-else
-    echo " Not installed"
-fi
-
-# Check arp
-echo -n "arp: "
-if command -v arp &> /dev/null; then
-    echo " Installed"
-else
-    echo "  Not installed (needed for MAC address resolution)"
-fi
-
-echo "=========================================="
-echo "Dependency check complete!"
+22/tcp   open  ssh      [GREEN]
+80/tcp   open  http     [GREEN]
+443/tcp  open  https    [GREEN]
 ```
 
-Save this as `check_dependencies.sh`, make it executable, and run it:
-```bash
-chmod +x check_dependencies.sh
-./check_dependencies.sh
+### CVE Detection
+```
+🚨 Found vulnerability: CVE-2021-44228  [RED]
+🚨 Found vulnerability: CVE-2022-1234  [RED]
+
+Found 2 CVE(s):
+   • CVE-2021-44228
+   • CVE-2022-1234
+```
+
+### Post-Scan Menu
+```
+WHAT WOULD YOU LIKE TO DO NEXT?
+
+[1] Re-run host discovery (ping)
+[2] Re-run host discovery (arp-scan)
+[3] Scan last IP again with different options
+[4] Scan a different IP from discovered hosts
+[5] Scan a custom IP address
+[6] Launch Metasploit (vulnerabilities found!)
+[7] Exit tool
 ```
 
 ---
 
-## Running the Script
+## Metasploit Integration
 
-After installation:
+When vulnerabilities are found, CNIGT can launch Metasploit Framework:
 
+1. **Legal Disclaimer** - Ensures responsible use
+2. **Auto-Installation** - Installs Metasploit if not present
+3. **CVE Information** - Shows discovered CVEs
+4. **Search Tips** - Provides Metasploit commands
+5. **Direct Launch** - Opens msfconsole with context
+
+### Example Metasploit Workflow
 ```bash
-# Make the script executable
-chmod +x network_scan.py
+# After vulnerability scan finds CVE-2021-44228
+[6] Launch Metasploit
 
-# Run the script
-sudo python3 network_scan.py
+# In msfconsole:
+msf6 > search CVE-2021-44228
+msf6 > use exploit/multi/http/log4shell
+msf6 > set RHOSTS 192.168.1.100
+msf6 > exploit
 ```
 
-**Note:** `sudo` is required for:
-- Running nmap with OS detection and certain scan types
-- Running arp-scan
-- Accessing raw network interfaces
+---
+
+## Platform Support
+
+| OS | Support | Notes |
+|----|---------|-------|
+| Kali Linux | ✅ Full | Recommended platform |
+| Ubuntu/Debian | ✅ Full | All features supported |
+| CentOS/RHEL | ✅ Full | May need EPEL for arp-scan |
+| Arch Linux | ✅ Full | All features supported |
+| macOS | ⚠️ Partial | Limited arp-scan support |
+| Windows (WSL) | ⚠️ Partial | Use WSL2 for best results |
 
 ---
 
 ## Troubleshooting
 
-### Issue: "ModuleNotFoundError: No module named 'rich'"
-**Solution:**
+### Common Issues
+
+**Issue: ModuleNotFoundError: No module named 'rich'**
 ```bash
 pip install rich
 # or
 pip3 install rich
-# or
-python3 -m pip install rich
 ```
 
-### Issue: "arp-scan: command not found"
-**Solution:**
+**Issue: arp-scan: command not found**
 ```bash
 sudo apt install arp-scan
-```
-Or run the script and it will offer to install it automatically.
-
-### Issue: "nmap: command not found"
-**Solution:**
-```bash
-sudo apt install nmap
+# The tool will also offer to auto-install
 ```
 
-### Issue: Permission denied
-**Solution:**
+**Issue: Permission denied**
 ```bash
-sudo python3 network_scan.py
+# run with sudo (Recommanded)
+sudo python3 CNIGT.py
+# or
+sudo ./CNIGT.py # if executable
 ```
 
-### Issue: "ifconfig: command not found"
-**Solution:** The script will automatically fall back to `ip` command or offer to install net-tools.
+**Issue: No hosts found**
+- Check if you're on the correct network
+- Try thorough arp-scan mode
+- Verify firewall isn't blocking ICMP/ARP
+- Try ping discovery method
 
----
-
-## Installation on Different Systems
-
-### Kali Linux
+**Issue: Metasploit won't install**
 ```bash
+# Manual installation for Kali
 sudo apt update
-sudo apt install -y nmap arp-scan net-tools
-pip install rich
-```
+sudo apt install metasploit-framework
 
-### Ubuntu/Debian
-```bash
-sudo apt update
-sudo apt install -y python3 python3-pip nmap arp-scan net-tools
-pip3 install rich
-```
-
-### CentOS/RHEL/Fedora
-```bash
-sudo yum install -y python3 python3-pip nmap net-tools
-sudo yum install arp-scan  # May need EPEL repository
-pip3 install rich
-```
-
-### Arch Linux
-```bash
-sudo pacman -Syu
-sudo pacman -S python python-pip nmap arp-scan net-tools
-pip install rich
-```
-
-### macOS
-```bash
-# Install Homebrew if not installed
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Install dependencies
-brew install python nmap arp-scan
-pip3 install rich
+# For other distros, see: https://docs.metasploit.com/
 ```
 
 ---
 
-## Permissions Note
+## Advanced Usage
 
-Some operations require root privileges:
-- **nmap** with OS detection (`-O`)
-- **arp-scan** (requires raw socket access)
-- Accessing certain network interfaces
+### Scanning Large Networks
+For networks larger than /24 (255+ hosts):
+1. Use **arp-scan** (much faster than ping)
+2. Select **thorough mode** for complete coverage
+3. Be patient - large scans take time
 
-Always run the script with `sudo`:
-```bash
-sudo python3 network_scan.py
+### Custom Port Examples
 ```
+Single ports:        80,443,8080
+Port range:          1-1000
+Mixed:               22,80-100,443,8000-9000
+All common:          Leave empty and select option 4
+All ports:           Select option 3
+```
+
+### Vulnerability Scanning Best Practices
+1. **Start with version detection** (option 1)
+2. **Add vulnerability scan** (option 13)
+3. **Use timing template** (option 10) for faster results
+4. **Enable verbose** (option 11) for detailed output
+5. **Review CVEs** before launching Metasploit
 
 ---
 
-## 📝 Summary
+## Security Best Practices
 
-**Minimum Requirements:**
-- Python 3.6+
-- pip
-- rich (Python package)
-- nmap
-- ping
+### Before Scanning
+- Obtain **written permission**
+- Document your scope
+- Inform network administrators
+- Plan your testing window
+- Have an incident response plan
 
-**Recommended:**
-- arp-scan (for better host discovery)
-- net-tools (for ifconfig)
+### During Scanning
+- Start with **non-intrusive scans**
+- Monitor for **system impacts**
+- Respect rate limits
+- Document all findings
+- Stop if systems become unstable
 
-**Installation Time:** ~2-5 minutes
-
-**Disk Space:** ~50-100 MB for all dependencies
+### After Scanning
+- **Report all vulnerabilities** (if founded)
+- Provide remediation recommendations
+- Delete sensitive data
+- Follow responsible disclosure
+- Archive logs securely
 
 ---
 
-## Ready to Use!
+## Educational Use
 
-Once all dependencies are installed, you're ready to scan your network:
+CNIGT is perfect for:
+- **Cybersecurity courses**
+- **CTF competitions**
+- **Home lab testing**
+- **Learning network security**
+- **Preparation for certifications** and more...
 
-```bash
-sudo python3 network_scan.py
-```
 
-Enjoy using CNIGT v2.1.0!
+---
+
+## Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+---
+
+## Changelog
+
+### v2.1.0 (Current)
+- Added Metasploit integration
+- CVE detection and highlighting
+- Colored nmap output (green open ports)
+- Post-scan interactive menu
+- Custom port range option
+- Session persistence
+- Fixed '--script vuln' argument parsing
+
+### v2.0.0
+- Added user choice for discovery method
+- Thorough arp-scan mode
+- Enhanced nmap options
+- Improved error handling
+
+### v1.9.0
+- Automatic subnet detection
+- arp-scan integration
+- Rich terminal UI
+- Hostname resolution
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Legal Notice
+
+This tool is provided "as is" without warranty of any kind. The authors are not responsible for any damage or legal issues arising from the use or misuse of this tool.
+
+**Users are solely responsible for:**
+- Obtaining proper authorization
+- Complying with local laws
+- Any consequences of their actions
+
+**Remember:** *With great power comes great responsibility.*
+
+---
+
+## Author
+
+Made with love by **@KingsMover**
+
+---
+
+## Acknowledgments
+
+- **nmap** - Network exploration and security auditing
+- **arp-scan** - ARP scanning and fingerprinting tool
+- **Metasploit** - Penetration testing framework
+- **rich** - Beautiful terminal formatting library
+- **The cybersecurity community** - For continuous learning and improvement
+
+---
+
+## Support
+
+Found a bug? Have a feature request?
+- [Open an issue](https://github.com/kingsmover/CNIGT/issues)
+- [Request a feature](https://github.com/kingsmover/CNIGT/issues/new)
+
+---
+
+**Happy (Ethical) Hacking!**
+
+---
