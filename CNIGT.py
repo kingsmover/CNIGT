@@ -27,7 +27,7 @@ banner = """
   ░░░░░░░░░  ░░░░░    ░░░░░ ░░░░░   ░░░░░░░░░     ░░░░░
 """
 Ccomment = """
-                                  +Version 2.2.0
+                                  +Version 2.1.0
                                       ++Made With Love By @KingsMover
                                            +++Current Network Information Gathering Tool (CNIGT) is an automated
                                               tool that can help you to perform an active scan for your network 
