@@ -26,6 +26,12 @@
 
 ---
 
+## 📖 Featured Article
+
+**[Read the full story on Medium: Building CNIGT - From Discovery to Exploitation](https://kingsmover.medium.com/building-cnigt-an-automated-network-reconnaissance-tool-that-goes-from-discovery-to-exploitation-6606fc06a172)**
+
+*Learn about the design decisions, technical challenges, and lessons learned while building this tool.*
+
 ## Features
 
 ### v2.1.0 New Features
