@@ -1,10 +1,10 @@
-# CNIGT v2.1.0 - Current Network Information Gathering Tool
-
-**An automated network reconnaissance and vulnerability scanning tool with Metasploit integration.**
 ![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Stars](https://img.shields.io/github/stars/kingsmover/CNIGT)
 ![Version](https://img.shields.io/badge/version-2.1.0-orange.svg)
+# CNIGT v2.1.0 - Current Network Information Gathering Tool
+
+**An automated network reconnaissance and vulnerability scanning tool with Metasploit integration.**
 ---
 
 ## ⚠️ LEGAL DISCLAIMER
