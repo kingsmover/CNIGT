@@ -404,6 +404,35 @@ Contributions are welcome! Please:
 
 ---
 
+## FAQ
+
+**Q: Why do I need sudo?**
+A: nmap requires root for OS detection, SYN scans, and raw packet access.
+
+**Q: Is this tool safe to use?**
+A: Yes, but ONLY on networks you own or have permission to test.
+
+**Q: Can I use this for bug bounties?**
+A: Only if the program explicitly allows automated scanning. Read the rules!
+
+**Q: How is this different from just using nmap?**
+A: CNIGT automates the workflow, adds visualization, and integrates multiple tools.
+
+---
+
+## Why CNIGT?
+
+| Feature | Manual Tools | CNIGT |
+|---------|-------------|-------|
+| Network Detection | Manual config | Automatic |
+| Host Discovery | Multiple commands | One tool |
+| Vulnerability Scan | Manual nmap flags | Interactive menu |
+| CVE Extraction | Manual review | Automatic |
+| Metasploit Launch | Separate terminal | Integrated |
+               All in one
+
+ ---
+ 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
